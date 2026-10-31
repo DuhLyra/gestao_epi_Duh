@@ -1,0 +1,12 @@
+# Ficheiros de ambiente e credenciais
+.env
+*.pem
+
+# Ficheiros do sistema operativo e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Ficheiros temporários e logs
+*.log

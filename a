@@ -1,0 +1,138 @@
+    <!-- CARROSSEL DE IMAGENS DE CONSTRUÇÃO -->
+        <div class="mb-5">
+            <div id="carouselExampleAutoplaying" class="carousel slide rounded-5 overflow-hidden shadow" data-bs-ride="carousel" data-bs-autoplay="true">
+              <div class="carousel-inner">
+                <div class="carousel-item active"> 
+                  <!-- Substitui 'imagem1.jpg' pelo nome exato do teu ficheiro -->
+                  <img src="fotos.epi/dois constrtores.jpg" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item"> 
+                  <!-- Substitui 'imagem2.jpg' pelo nome exato do teu ficheiro -->
+                  <img src="fotos.epi/materiais e mini casa.jpg" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item"> 
+                  <!-- Substitui 'imagem3.jpg' pelo nome exato do teu ficheiro -->
+                  <img src="fotos.epi/trabalhadoresVerdes.jpg" class="d-block w-100" alt="">
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center p-3 bg-dark bg-opacity-75 text-white">
+                <div class="carousel-indicators position-relative m-0">
+                  <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-outline-light btn-sm" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">Anterior</button>
+                  <button class="btn btn-outline-light btn-sm" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">Próximo</button>
+                </div>
+              </div>
+            </div>
+        </div> 
+    
+
+<!-- SOBRE A EMPRESA -->
+        <section id="sobre" class="mb-5">
+            <header class="text-center mb-4">
+                <h1 class="fw-bold display-6 mb-3">Excelência e Inovação na Construção Civil</h1>
+                <p class="lead text-muted mx-auto" style="max-width: 800px;">
+                    A transformação de projetos complexos em estruturas sólidas é a base da nossa atuação. Execução de empreendimentos de médio e grande porte, com rigoroso compromisso com a excelência técnica e segurança do trabalho.
+                </p>
+            </header>
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header card-header-primary">
+                    <h4 class="mb-0 text-white fw-bold">Sistema de Gestão e Controle de Equipamentos de Proteção Individual (EPIs)</h4>
+                </div>
+                <div class="card-body p-4">
+                    <p>O sistema visa automatizar e centralizar o controle de concessão, devolução e manutenção dos EPIs, proporcionando rastreabilidade, conformidade normativa e eficiência operacional.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CARROSSEL -->
+        <div class="mb-5">
+            <div id="carouselExampleAutoplaying" class="carousel slide rounded-5 overflow-hidden shadow" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active"><img src="fotos.epi/organizando projetos.jpg" class="d-block w-100" alt="Projeto" style="height: 350px; object-fit: cover;"></div>
+                <div class="carousel-item"><img src="fotos.epi/dois constrtores.jpg" class="d-block w-100" alt="Obra" style="height: 350px; object-fit: cover;"></div>
+                <div class="carousel-item"><img src="fotos.epi/trabalhadoresVerdes.jpg" class="d-block w-100" alt="Equipe" style="height: 350px; object-fit: cover;"></div>
+              </div>
+            </div>
+        </div>
+         <!-- CARD INSTITUCIONAL E FINALIDADE DO PORTAL -->
+        <div class="card shadow-sm mb-5 border-0">
+            <div class="card-header card-header-primary">
+                <h4 class="mb-0 text-white fw-bold">🛡️ Sistema de Gestão e Controle de Equipamentos de Proteção Individual (EPIs)</h4>
+            </div>
+            <div class="card-body p-4">
+                <p class="mb-3">
+                    A conclusão de cada empreendimento reflete o nosso compromisso rigoroso com a <strong>excelência técnica</strong>, a <strong>pontualidade no cumprimento de cronogramas</strong>, a <strong>inovação em processos</strong> e a rigorosa observância às <strong>normas de segurança do trabalho</strong>. Acreditamos que a qualidade de uma edificação está diretamente associada ao planejamento estratégico e à valorização das equipes operacionais.
+                </p>
+                <p class="mb-4">
+                    Com o objetivo de assegurar a integridade física dos colaboradores e otimizar os processos internos nos nossos canteiros de obras, esta plataforma destina-se à gestão integrada de Equipamentos de Proteção Individual (EPIs).
+                </p>
+
+                <h5 class="fw-bold mb-3 text-white border-bottom pb-2" style="border-color: var(--cor-borda) !important;">Finalidade do Portal</h5>
+                <p class="mb-3">O sistema visa automatizar e centralizar o controle de concessão, devolução e manutenção dos EPIs, proporcionando:</p>
+                
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid var(--cor-borda);">
+                            <h6 class="fw-bold text-white mb-2">📦 Rastreabilidade e Logística</h6>
+                            <p class="small text-muted mb-0" style="color: var(--cor-texto-mutado) !important;">
+                                Monitoramento do histórico de empréstimos, permitindo a identificação imediata dos responsáveis e a disponibilidade dos itens em estoque.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid var(--cor-borda);">
+                            <h6 class="fw-bold text-white mb-2">📋 Conformidade Normativa</h6>
+                            <p class="small text-muted mb-0" style="color: var(--cor-texto-mutado) !important;">
+                                Garantia do cumprimento das exigências regulamentares relativas à segurança e saúde no trabalho.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid var(--cor-borda);">
+                            <h6 class="fw-bold text-white mb-2">⚡ Eficiência Operacional</h6>
+                            <p class="small text-muted mb-0" style="color: var(--cor-texto-mutado) !important;">
+                                Mitigação de perdas, controle de desgaste dos materiais e agilidade no fornecimento dos equipamentos aos trabalhadores.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="fst-italic text-end mb-0 text-muted small" style="color: var(--cor-texto-mutado) !important;">
+                    Esta iniciativa reforça a cultura de segurança, eficiência e responsabilidade corporativa da Empresa de construção civil.
+                </p>
+            </div>
+        </div>
+
+         <!-- REGISTRO DE EMPRÉSTIMOS -->
+        <section id="emprestimos" class="mb-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header card-header-primary d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 text-white">📋 Registro de Empréstimos</h5>
+                    <a href="#" onclick="verificarAcesso('form.php?tabela=emprestimos')" class="btn btn-sm btn-light fw-bold">+ Registrar Empréstimo</a>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead>
+                            <tr><th>#</th><th>Colaborador</th><th>EPI</th><th>Qtd</th><th>Data</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($emprestimos as $emp): ?>
+                                <tr>
+                                    <th><?= $emp['id'] ?></th>
+                                    <td><?= htmlspecialchars($emp['colaborador_nome']) ?></td>
+                                    <td><?= htmlspecialchars($emp['epi_nome']) ?></td>
+                                    <td><?= $emp['quantidade'] ?></td>
+                                    <td><?= date('d/m/Y H:i', strtotime($emp['data_emprestimo'])) ?></td>
+                                    <td><span class="badge bg-warning text-dark"><?= $emp['status'] ?></span></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>

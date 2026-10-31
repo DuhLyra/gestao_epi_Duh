@@ -1,0 +1,229 @@
+:root {
+    --cor-fundo: #0c0b0a;          /* Fundo preto profundo */
+    --cor-card-bg: #181513;        /* Fundo dos cards */
+    --cor-primaria: #593d31;       /* Marrom / Castanho da paleta */
+    --cor-secundaria: #8c7365;     /* Bege acinzentado / Taupe */
+    --cor-escura: #26201e;         /* Grafite/Marrom escuro */
+    --cor-texto: #ece8e5;          /* Cor da fonte equivalente e suave */
+    --cor-texto-mutado: #a49a93;    /* Cor para subtítulos e textos secundários */
+    --cor-borda: #332b26;          /* Borda sutil */
+    
+    /* Variáveis de Iluminação e Brilho (Glows & Lights) */
+    --luz-primaria: rgba(140, 115, 101, 0.4);   
+    --luz-hover: rgba(217, 179, 150, 0.25);     
+    --sombra-card: 0 10px 30px -5px rgba(0, 0, 0, 0.8), 0 0 15px rgba(89, 61, 49, 0.15);
+    --sombra-iluminada: 0 15px 35px -5px rgba(0, 0, 0, 0.9), 0 0 30px var(--luz-primaria);
+}
+
+/* Base Geral e Tipografia */
+html, body {
+    background-color: var(--cor-fundo) !important;
+    color: var(--cor-texto) !important;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif !important;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Aplicando cor equivalente em elementos de texto */
+p, span, li, a, td, th, label, input, select, textarea {
+    color: var(--cor-texto);
+}
+
+.text-muted, small {
+    color: var(--cor-texto-mutado) !important;
+}
+
+/* Títulos principais */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff !important;
+}
+
+h1 {
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    background: linear-gradient(180deg, #ffffff 0%, #e0d5ce 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.25));
+}
+
+/* -------------------------------------------------------------
+   CARROSSEL DE IMAGENS - Borda Luminosa e Vidro Fosco
+------------------------------------------------------------- */
+.carousel {
+    max-height: 450px;
+    border-radius: 20px !important;
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    border: 1px solid var(--cor-borda);
+    transition: all 0.4s ease;
+}
+
+.carousel:hover {
+    box-shadow: var(--sombra-iluminada);
+    border-color: var(--cor-secundaria) !important;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 400px;
+    filter: brightness(85%) contrast(105%);
+}
+
+.carousel .bg-dark {
+    background: rgba(24, 21, 19, 0.8) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* -------------------------------------------------------------
+   CARDS E TABELAS - Efeitos de Luz e Elevação
+------------------------------------------------------------- */
+.card {
+    background-color: var(--cor-card-bg) !important;
+    border: 1px solid var(--cor-borda) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--sombra-card);
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-iluminada);
+    border-color: rgba(140, 115, 101, 0.6) !important;
+}
+
+/* Cabeçalhos com Iluminação Superior */
+.card-header-primary {
+    background: linear-gradient(135deg, #6e4c3d 0%, #3e2a22 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    padding: 16px 20px !important;
+}
+
+.card-header-secondary {
+    background: linear-gradient(135deg, #9e8374 0%, #5e4c42 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    padding: 16px 20px !important;
+}
+
+.card-header-dark {
+    background: linear-gradient(135deg, #382e2b 0%, #151211 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    padding: 16px 20px !important;
+}
+
+/* Tabelas e Efeitos de Hover nas Linhas */
+.table {
+    color: var(--cor-texto) !important;
+    --bs-table-bg: transparent !important;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.02) !important;
+    --bs-table-hover-bg: rgba(140, 115, 101, 0.18) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+    margin-bottom: 0 !important;
+}
+
+.table th {
+    color: #ffffff !important;
+    border-bottom: 2px solid var(--cor-secundaria) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
+    padding: 14px 16px !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.table td {
+    color: var(--cor-texto) !important;
+    padding: 14px 16px !important;
+    font-size: 0.93rem;
+}
+
+/* -------------------------------------------------------------
+   BOTÕES E BADGES COM EFEITO GLOW
+------------------------------------------------------------- */
+.btn-outline-warning {
+    color: #ffd700 !important;
+    border-color: rgba(255, 215, 0, 0.4) !important;
+    transition: all 0.25s ease;
+}
+
+.btn-outline-warning:hover {
+    background-color: #ffd700 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6) !important;
+}
+
+.btn-outline-danger {
+    color: #ff4d4d !important;
+    border-color: rgba(255, 77, 77, 0.4) !important;
+    transition: all 0.25s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #ff4d4d !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.6) !important;
+}
+
+.btn-light {
+    background-color: #ffffff !important;
+    color: #181513 !important;
+    border-radius: 8px !important;
+    transition: all 0.25s ease !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.6) !important;
+}
+
+.btn-custom {
+    background-color: var(--cor-primaria) !important;
+    color: #ffffff !important;
+    border: 1px solid var(--cor-secundaria) !important;
+    border-radius: 8px !important;
+    transition: all 0.25s ease !important;
+}
+
+.btn-custom:hover {
+    background-color: var(--cor-secundaria) !important;
+    box-shadow: 0 0 15px var(--luz-primaria) !important;
+}
+
+/* Badges com Luz Neon */
+.badge {
+    padding: 6px 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+    border-radius: 6px !important;
+}
+
+.badge.bg-success {
+    background-color: rgba(46, 204, 113, 0.2) !important;
+    color: #2ecc71 !important;
+    border: 1px solid rgba(46, 204, 113, 0.5);
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+}
+
+.badge.bg-warning {
+    background-color: rgba(241, 196, 15, 0.2) !important;
+    color: #f1c40f !important;
+    border: 1px solid rgba(241, 196, 15, 0.5);
+    box-shadow: 0 0 10px rgba(241, 196, 15, 0.3);
+}
+
+.badge.bg-danger {
+    background-color: rgba(231, 76, 60, 0.2) !important;
+    color: #e74c3c !important;
+    border: 1px solid rgba(231, 76, 60, 0.5);
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+}
