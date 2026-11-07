@@ -224,41 +224,54 @@ try {
         </div>
 
  <!-- REGISTRO DE EMPRÉSTIMOS -->
-        <table class="table table-dark table-striped align-middle mb-0">
-    <thead>
-        <tr>
-            <th>Colaborador</th>
-            <th>EPI</th>
-            <th>Atendente</th>
-            <th>Qtd.</th>
-            <th>Data Empréstimo</th>
-            <th>Devolução Prevista</th>
-            <th>Status</th>
-            <th class="text-end">Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($emprestimos as $e): ?>
-            <tr>
-                <td><?= htmlspecialchars($e['colaborador_nome']) ?></td>
-                <td><?= htmlspecialchars($e['epi_nome']) ?></td>
-                <td><?= htmlspecialchars($e['usuario_nome']) ?></td>
-                <td><?= $e['quantidade'] ?></td>
-                <td><?= date('d/m/Y', strtotime($e['data_emprestimo'])) ?></td>
-                <td><?= $e['data_devolucao_estimada'] ? date('d/m/Y', strtotime($e['data_devolucao_estimada'])) : '-' ?></td>
-                <td>
-                    <span class="badge bg-<?= $e['status'] === 'Emprestado' ? 'warning' : ($e['status'] === 'Devolvido' ? 'success' : 'danger') ?>">
-                        <?= htmlspecialchars($e['status']) ?>
-                    </span>
-                </td>
-                <td class="text-end">
-                    <a href="form.php?tabela=emprestimos&id=<?= $e['id'] ?>" class="btn btn-sm btn-outline-warning">Editar</a>
-                    <a href="acoes.php?acao=excluir&tabela=emprestimos&id=<?= $e['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir este empréstimo?')">Excluir</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+        <!-- EMPRÉSTIMOS REGISTADOS -->
+        <section id="emprestimos" class="mb-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header card-header-secondary d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 text-white">Empréstimos Registados</h5>
+                    <a href="form.php?tabela=emprestimos" class="btn btn-sm btn-light fw-bold">+ Realizar Empréstimo</a>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Colaborador</th>
+                                <th>EPI</th>
+                                <th>Atendente</th>
+                                <th>Qtd.</th>
+                                <th>Data Empréstimo</th>
+                                <th>Devolução Prevista</th>
+                                <th>Status</th>
+                                <th class="text-end">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($emprestimos as $e): ?>
+                                <tr>
+                                    <th><?= $e['id'] ?></th>
+                                    <td><?= htmlspecialchars($e['colaborador_nome']) ?></td>
+                                    <td><?= htmlspecialchars($e['epi_nome']) ?></td>
+                                    <td><?= htmlspecialchars($e['usuario_nome']) ?></td>
+                                    <td><strong><?= $e['quantidade'] ?></strong> un</td>
+                                    <td><?= date('d/m/Y', strtotime($e['data_emprestimo'])) ?></td>
+                                    <td><?= $e['data_devolucao_estimada'] ? date('d/m/Y', strtotime($e['data_devolucao_estimada'])) : '-' ?></td>
+                                    <td>
+                                        <span class="badge bg-<?= $e['status'] === 'Emprestado' ? 'warning' : ($e['status'] === 'Devolvido' ? 'success' : 'danger') ?>">
+                                            <?= htmlspecialchars($e['status']) ?>
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <a href="#" onclick="verificarAcesso('form.php?tabela=emprestimos&id=<?= $e['id'] ?>', event)" class="btn btn-sm btn-outline-warning">Editar</a>
+                                        <a href="#" onclick="confirmarExclusao('acoes.php?acao=excluir&tabela=emprestimos&id=<?= $e['id'] ?>', event)" class="btn btn-sm btn-outline-danger">Excluir</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
         <!-- EQUIPAMENTOS (EPIS) -->
         <section id="epis" class="mb-5">
             <div class="card shadow-sm border-0">
