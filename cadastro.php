@@ -2,28 +2,24 @@
 session_start();
 $erro = '';
 
+// Inclui a conexão centralizada com a base de dados do Aiven
+require_once 'conexao.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome  = $_POST['nome'] ?? '';
     $email = $_POST['email'] ?? '';
     $senha = $_POST['senha'] ?? '';
     $nivel = 'operador';
 
-    $host     = 'localhost';
-    $dbname   = 'gestao_epi';
-    $username = 'root';
-    $password = '';
-
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Verifica se o e-mail já existe na base de dados
+        // Verifica se o e-mail já existe utilizando o $pdo do conexao.php
         $stmtCheck = $pdo->prepare("SELECT id FROM usuarios_sistema WHERE email = ?");
         $stmtCheck->execute([$email]);
+
         if ($stmtCheck->rowCount() > 0) {
             $erro = "Este e-mail já está registado no sistema.";
         } else {
-            // Insere o novo utilizador com senha encriptada
+            // Insere o novo utilizador com a palavra-passe encriptada
             $senhaHash = password_hash($senha, PASSWORD_BCRYPT);
             $stmt = $pdo->prepare("INSERT INTO usuarios_sistema (nome, email, senha, nivel_acesso) VALUES (?, ?, ?, ?)");
             $stmt->execute([$nome, $email, $senhaHash, $nivel]);
