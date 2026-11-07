@@ -7,20 +7,15 @@ if (isset($_GET['alerta']) && $_GET['alerta'] === 'cadastro_sucesso') {
     $sucesso = "Conta criada com sucesso! Faça login para entrar.";
 }
 
+// Inclui a conexão centralizada com o banco do Aiven
+require_once 'conexao.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $senha = $_POST['senha'] ?? '';
 
-    $host     = 'localhost';
-    $dbname   = 'gestao_epi';
-    $username = 'root';
-    $password = '';
-
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Valida os dados existentes na base de dados
+        // Utiliza a variável $pdo já criada pelo conexao.php
         $stmt = $pdo->prepare("SELECT * FROM usuarios_sistema WHERE email = ?");
         $stmt->execute([$email]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -29,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nome'] = $usuario['nome'];
             $_SESSION['usuario_email'] = $usuario['email'];
-            $_SESSION['nivel_acesso'] = $usuario['nivel_acesso'];
+            $_SESSION['nivel_acesso'] = $usuario['nivel_acesso'] ?? 'user';
 
             header("Location: index.php?alerta=login_sucesso");
             exit;
@@ -72,11 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" name="senha" class="form-control bg-dark text-light border-secondary" required>
                 </div>
                 
-                <!-- Botão de Validação e Entrada -->
                 <button type="submit" class="btn btn-custom w-100 py-2 fw-bold mb-3">Entrar</button>
             </form>
 
-            <!-- Botão Direcionando para o Cadastro (Abaixo do botão Entrar) -->
             <div class="d-grid gap-2 mb-3">
                 <a href="cadastro.php" class="btn btn-outline-secondary py-2 fw-bold">Não tem conta? Cadastre-se</a>
             </div>
