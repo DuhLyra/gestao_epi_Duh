@@ -1,18 +1,8 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+session_start();
 
-$host     = 'localhost';
-$dbname   = 'gestao_epi';
-$username = 'root';
-$password = '';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erro na conexão: " . $e->getMessage());
-}
+// Inclui a conexão centralizada com a base de dados do Aiven
+require_once 'conexao.php';
 
 $tabela = $_GET['tabela'] ?? '';
 $id     = (int)($_GET['id'] ?? 0);
@@ -21,7 +11,7 @@ $dados  = [];
 if ($id > 0 && !empty($tabela)) {
     $stmt = $pdo->prepare("SELECT * FROM $tabela WHERE id = ?");
     $stmt->execute([$id]);
-    $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+    $dados = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
 }
 
 // Listas auxiliares para o formulário de empréstimos
@@ -42,7 +32,7 @@ $usuarios      = $pdo->query("SELECT id, nome FROM usuarios_sistema ORDER BY nom
     <div class="container py-5" style="max-width: 700px;">
         <div class="card shadow border-0">
             <div class="card-header card-header-primary text-white">
-                <h4 class="mb-0"><?= $id > 0 ? 'Editar Registro' : 'Novo Cadastro' ?> (<?= ucfirst($tabela) ?>)</h4>
+                <h4 class="mb-0"><?= $id > 0 ? 'Editar Registro' : 'Novo Cadastro' ?> (<?= htmlspecialchars(ucfirst($tabela)) ?>)</h4>
             </div>
             <div class="card-body p-4">
 
@@ -164,7 +154,7 @@ $usuarios      = $pdo->query("SELECT id, nome FROM usuarios_sistema ORDER BY nom
                         <?php if ($id > 0): ?>
                             <div class="mb-3">
                                 <label class="form-label">Data Dev. Real (Preencha ao devolver)</label>
-                                <input type="datetime-local" name="data_devolucao_real" class="form-control" value="<?= $dados['data_devolucao_real'] ? date('Y-m-d\TH:i', strtotime($dados['data_devolucao_real'])) : '' ?>">
+                                <input type="datetime-local" name="data_devolucao_real" class="form-control" value="<?= !empty($dados['data_devolucao_real']) ? date('Y-m-d\TH:i', strtotime($dados['data_devolucao_real'])) : '' ?>">
                             </div>
                         <?php endif; ?>
                         <div class="mb-3">
