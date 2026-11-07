@@ -8,7 +8,7 @@ header("Expires: 0");
 
 $logado = isset($_SESSION['usuario_id']);
 
-// Inclui o ficheiro de conexão com a base de dados
+// Inclui o ficheiro de conexão com o banco do Aiven via variáveis de ambiente
 require_once 'conexao.php';
 
 try {
@@ -28,28 +28,7 @@ try {
 } catch (PDOException $e) {
     $epis = $colaboradores = $emprestimos = [];
 }
-?>
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    $epis = $pdo->query("SELECT * FROM epis ORDER BY nome ASC")->fetchAll(PDO::FETCH_ASSOC);
-    $colaboradores = $pdo->query("SELECT * FROM colaboradores ORDER BY nome ASC")->fetchAll(PDO::FETCH_ASSOC);
-    
-    $sqlEmprestimos = "
-        SELECT e.id, c.nome AS colaborador_nome, ep.nome AS epi_nome, u.nome AS usuario_nome,
-               e.quantidade, e.data_emprestimo, e.data_devolucao_estimada, e.status
-        FROM emprestimos e
-        JOIN colaboradores c ON e.colaborador_id = c.id
-        JOIN epis ep ON e.epi_id = ep.id
-        JOIN usuarios_sistema u ON e.usuario_id = u.id
-        ORDER BY e.data_emprestimo DESC
-    ";
-    $emprestimos = $pdo->query($sqlEmprestimos)->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    $epis = $colaboradores = $emprestimos = [];
-}
 ?>
 <!DOCTYPE html>
 <html lang="pt-PT">
