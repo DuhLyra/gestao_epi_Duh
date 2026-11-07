@@ -1,18 +1,8 @@
 <?php
 session_start();
 
-$host     = 'localhost';
-$dbname   = 'gestao_epi';
-$username = 'root';
-$password = '';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    header("Location: index.php?erro=conexao");
-    exit;
-}
+// Inclui a conexão centralizada com a base de dados do Aiven
+require_once 'conexao.php';
 
 $acao = $_REQUEST['acao'] ?? '';
 $tabela = $_REQUEST['tabela'] ?? '';
