@@ -8,7 +8,7 @@ $acao = $_REQUEST['acao'] ?? '';
 $tabela = $_REQUEST['tabela'] ?? '';
 
 try {
-    // Processamento da exclusão de dados sem exigência de login
+    // Processamento da exclusão de dados
     if ($acao === 'excluir') {
         $id = (int)($_GET['id'] ?? 0);
         
@@ -29,7 +29,7 @@ try {
         exit;
     }
 
-    // Ações de Inserção e Atualização via POST sem exigência de login
+    // Ações de Inserção e Atualização via POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = (int)($_POST['id'] ?? 0);
 
@@ -67,20 +67,34 @@ try {
             }
         } elseif ($tabela === 'emprestimos') {
             $colaborador_id = (int)($_POST['colaborador_id'] ?? 0);
-            $epi_id = (int)($_POST['epi_id'] ?? 0);
-            $usuario_id = $_SESSION['usuario_id'] ?? null;
-            $quantidade = (int)($_POST['quantidade'] ?? 0);
-            $estimada = !empty($_POST['data_devolucao_estimada']) ? $_POST['data_devolucao_estimada'] : null;
-            $status = $_POST['status'] ?? 'Ativo';
-            $observacao = $_POST['observacao'] ?? '';
+            $epi_id         = (int)($_POST['epi_id'] ?? 0);
+            $usuario_id     = (int)($_POST['usuario_id'] ?? $_SESSION['usuario_id'] ?? 0);
+            $quantidade     = (int)($_POST['quantidade'] ?? 1);
+            $estimada       = !empty($_POST['data_devolucao_estimada']) ? $_POST['data_devolucao_estimada'] : null;
+            $devolucao_real = !empty($_POST['data_devolucao_real']) ? $_POST['data_devolucao_real'] : null;
+            $status         = $_POST['status'] ?? 'Emprestado';
+            $observacao     = $_POST['observacao'] ?? '';
 
-            $stmt = $pdo->prepare("INSERT INTO emprestimos (colaborador_id, epi_id, usuario_id, quantidade, data_devolucao_estimada, status, observacao) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$colaborador_id, $epi_id, $usuario_id, $quantidade, $estimada, $status, $observacao]);
-            
-            $stmtBaixa = $pdo->prepare("UPDATE epis SET quantidade_estoque = quantidade_estoque - ? WHERE id = ?");
-            $stmtBaixa->execute([$quantidade, $epi_id]);
+            if ($id > 0) {
+                // Atualiza o registro do empréstimo existente
+                $stmt = $pdo->prepare("
+                    UPDATE emprestimos 
+                    SET colaborador_id = ?, epi_id = ?, usuario_id = ?, quantidade = ?, 
+                        data_devolucao_estimada = ?, data_devolucao_real = ?, status = ?, observacao = ? 
+                    WHERE id = ?
+                ");
+                $stmt->execute([$colaborador_id, $epi_id, $usuario_id, $quantidade, $estimada, $devolucao_real, $status, $observacao, $id]);
+                $msg = "emprestimo_atualizado";
+            } else {
+                // Insere novo empréstimo e abate do estoque
+                $stmt = $pdo->prepare("INSERT INTO emprestimos (colaborador_id, epi_id, usuario_id, quantidade, data_devolucao_estimada, status, observacao) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$colaborador_id, $epi_id, $usuario_id, $quantidade, $estimada, $status, $observacao]);
+                
+                $stmtBaixa = $pdo->prepare("UPDATE epis SET quantidade_estoque = quantidade_estoque - ? WHERE id = ?");
+                $stmtBaixa->execute([$quantidade, $epi_id]);
 
-            $msg = "emprestimo_registrado";
+                $msg = "emprestimo_registrado";
+            }
         }
 
         header("Location: index.php?alerta=" . ($msg ?? 'sucesso'));
