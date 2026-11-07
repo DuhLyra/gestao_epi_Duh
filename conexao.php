@@ -1,29 +1,25 @@
 <?php
-session_start();
+// Lê as variáveis de ambiente com fallback para desenvolvimento local
+$host     = getenv('DB_HOST') ?: 'localhost';
+$port     = getenv('DB_PORT') ?: '3306';
+$dbname   = getenv('DB_NAME') ?: 'gestao_epi';
+$username = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASSWORD') ?: '';
+$ca_cert  = getenv('DB_SSL_CA') ?: null;
 
-// Inclui a conexão centralizada com as variáveis de ambiente do Aiven
-require_once 'conexao.php';
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
 
-// Caso haja processamento POST do formulário no próprio arquivo:
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome  = $_POST['nome'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $senha = $_POST['senha'] ?? '';
+// Adiciona o certificado SSL se estiver definido (necessário no Aiven)
+if ($ca_cert && file_exists($ca_cert)) {
+    $options[PDO::MYSQL_ATTR_SSL_CA] = $ca_cert;
+}
 
-    if (!empty($nome) && !empty($email) && !empty($senha)) {
-        try {
-            // Exemplo de inserção utilizando o $pdo vindo do conexao.php
-            $stmt = $pdo->prepare("INSERT INTO usuarios_sistema (nome, email, senha) VALUES (?, ?, ?)");
-            // Recomenda-se password_hash($senha, PASSWORD_DEFAULT) para maior segurança
-            $stmt->execute([$nome, $email, $senha]); 
-
-            header("Location: login.php?alerta=cadastro_sucesso");
-            exit;
-        } catch (PDOException $e) {
-            $erro = "Erro ao cadastrar usuário: " . $e->getMessage();
-        }
-    } else {
-        $erro = "Preencha todos os campos!";
-    }
+try {
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $username, $password, $options);
+} catch (PDOException $e) {
+    die("Erro na conexão com a base de dados: " . $e->getMessage());
 }
 ?>
